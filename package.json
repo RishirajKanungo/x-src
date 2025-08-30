@@ -1,0 +1,33 @@
+{
+  "name": "x-src",
+  "version": "0.1.0",
+  "description": "Cross-source music tools hub with modern web technologies",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "dev": "turbo run dev",
+    "lint": "turbo run lint",
+    "type-check": "turbo run type-check",
+    "test": "turbo run test",
+    "clean": "turbo run clean",
+    "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
+    "db:generate": "cd apps/web && pnpm prisma generate",
+    "db:push": "cd apps/web && pnpm prisma db push",
+    "db:studio": "cd apps/web && pnpm prisma studio"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "prettier": "^3.0.0",
+    "turbo": "^1.10.0",
+    "typescript": "^5.2.0"
+  },
+  "packageManager": "pnpm",
+  "engines": {
+    "node": ">=18.0.0",
+    "pnpm": ">=8.0.0"
+  }
+}

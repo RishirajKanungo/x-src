@@ -1,0 +1,28 @@
+---
+alwaysApply: true
+---
+
+## Priorities
+
+- 2025 platform features: WebGPU, WebCodecs, AudioWorklet, RSC/Server Actions.
+- No DRM bypass. Gate features via `SourceCapabilities`. Favor Local‑Only for PCM features.
+- Single truth for timing: the Beat Bus. All visuals and quantized UI depend on it.
+
+## Stack
+
+- Next.js App Router + Server Actions. TypeScript. Tailwind + shadcn/ui.
+- Postgres + Prisma; Redis (Upstash) for presence; R2/S3 for clips.
+- WebGPU (WGSL) for rendering; ONNX Runtime Web (WebGPU EP) for light ML.
+- Monorepo with Turborepo + pnpm.
+
+## Coding Style
+
+- Strict TS, ESLint, Prettier. No `any`. Zod for validation. Discriminated unions for events/messages.
+- Keep React components presentational; business logic in hooks/services/packages.
+- Deterministic rendering: avoid time‑based randomness; seed by track id/section index.
+
+## Architecture
+
+- Core packages: `core` (types, Beat Bus), `sources` (adapters), `visuals` (engine + shaders), `audio-dsp` (WASM/Worklet).
+- Apps live under `/app/apps/*` with shared library pages under `/dashboard`.
+- Server Actions for ingest/analyze/clip export; avoid ad‑hoc REST unless needed.
